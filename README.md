@@ -15,3 +15,11 @@ session = boto3.Session(profile_name="default", region_name="us-east-1")
 6. Create a new Workload estimate. Refer: https://docs.aws.amazon.com/cost-management/latest/userguide/pc-workload-estimate.html.
 7. Add previously saved estimates to my workload estimate. Refer: https://docs.aws.amazon.com/cost-management/latest/userguide/pc-create-workload-previous-url.html.
 8. Once usage is added, then run this program (`$ python main.py`), and pass the GUID of the Workload estimate to the program. You can find the GUID under 'Estimate Id' column on Saved Estimate page or from the browser URL. This GUID is also part of the estimate ARN.
+
+# Workflow
+
+1. Retrieve usage lines from a authenticatd Pricing Calculator workload estimate.
+2. Parse service code, usage type, operation from the retrieved lines.
+3. Calls `Price List API` with this tuple. 
+4. Retrieves `rateCode` and `description` from `GetProducts` API. 
+5. Appends an excel named *data.xlsx* with the service code, usage type, operation, rate code, and description. 
